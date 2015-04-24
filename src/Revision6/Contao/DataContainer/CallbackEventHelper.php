@@ -14,7 +14,7 @@
 
 namespace Revision6\Contao\DataContainer;
 
-use Revision6\Contao\Events\OnloadCallback\LabelCallbackEvent;
+use Revision6\Contao\DataContainer\Events\LabelCallbackEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
