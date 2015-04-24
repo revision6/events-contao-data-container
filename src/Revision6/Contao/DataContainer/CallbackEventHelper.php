@@ -38,6 +38,8 @@ class CallbackEventHelper
     {
         $event = new LabelCallbackEvent($row, $label);
         self::dispatchEvent($eventName, $event);
+        
+        return $event->getLabel();
     }
 
     /**
