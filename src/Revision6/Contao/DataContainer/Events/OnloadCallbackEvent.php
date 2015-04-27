@@ -1,11 +1,11 @@
 <?php
 
 /**
- * The events onload-callback allows to use the onload_callback as event
+ * The events contao data-container allows you to use contao callbacks as events.
  *
  * PHP version 5
  *
- * @package    EventsSaveCallback
+ * @package    EventContaoDataContainer
  * @author     Christopher Boelter <c.boelter@revision6.de>
  * @copyright  Revision6 UG
  * @license    LGPL.
