@@ -43,15 +43,24 @@ class LabelCallbackEvent extends Event
     protected $label;
 
     /**
+     * The current dataContainer instance.
+     *
+     * @var object
+     */
+    protected $dataContainer;
+
+    /**
      * Set the event vars.
      *
-     * @param array  $row   The current database row.
-     * @param string $label The current label.
+     * @param array  $row           The current database row.
+     * @param string $label         The current label.
+     * @param object $dataContainer The current dataContainer instance.
      */
-    public function __construct($row, $label)
+    public function __construct($row, $label, $dataContainer)
     {
-        $this->row   = $row;
-        $this->label = $label;
+        $this->row           = $row;
+        $this->label         = $label;
+        $this->dataContainer = $dataContainer;
     }
 
     /**
@@ -84,5 +93,15 @@ class LabelCallbackEvent extends Event
     public function getLabel()
     {
         return $this->label;
+    }
+
+    public function getDataContainer()
+    {
+        return $this->dataContainer;
+    }
+
+    public function getTableName()
+    {
+        return $this->dataContainer->table;
     }
 }

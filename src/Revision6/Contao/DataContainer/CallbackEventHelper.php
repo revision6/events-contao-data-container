@@ -15,6 +15,9 @@
 namespace Revision6\Contao\DataContainer;
 
 use Revision6\Contao\DataContainer\Events\LabelCallbackEvent;
+use Revision6\Contao\DataContainer\Events\OnloadCallbackEvent;
+use Revision6\Contao\DataContainer\Events\OptionsCallbackEvent;
+use Revision6\Contao\DataContainer\Events\SaveCallbackEvent;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -34,13 +37,59 @@ class CallbackEventHelper
      *
      * @return void
      */
-    public static function invokeLabelCallbackEvent($row, $label, $eventName)
+    public static function invokeLabelCallbackEvent($row, $label, $dataContainer, $eventName)
     {
-        $event = new LabelCallbackEvent($row, $label);
+        $event = new LabelCallbackEvent($row, $label, $dataContainer);
         self::dispatchEvent($eventName, $event);
-        
+
         return $event->getLabel();
     }
+
+    /**
+     * Dispatch the saveCallbackEvent.
+     *
+     * @param \DataContainer $dataContainer The current dataContainer.
+     * @param mixed          $value         The current field value.
+     * @param string         $eventName     The current event name.
+     *
+     * @return mixed
+     */
+    public static function invokeSaveCallbackEvent($dataContainer, $value, $eventName)
+    {
+        $event = new SaveCallbackEvent($value, $dataContainer);
+        self::dispatchEvent($eventName, $event);
+
+        return $event->getValue();
+    }
+
+    /**
+     * Dispatch the onloadCallbackEvent.
+     *
+     * @param \DataContainer $dataContainer The current dataContainer instance.
+     * @param string         $eventName     The current event name.
+     */
+    public static function invokeOnloadCallbackEvent($dataContainer, $eventName)
+    {
+        $event = new OnloadCallbackEvent($dataContainer);
+        self::dispatchEvent($eventName, $event);
+    }
+
+    /**
+     * Dispatch the optionsCallbackEvent.
+     *
+     * @param \DataContainer $dataContainern The current dataConter instance.
+     * @param string         $eventName      The current event name.
+     *
+     * @return array
+     */
+    public static function invokeOptionsCallbackEvent($dataContainer, $eventName)
+    {
+        $event = new OptionsCallbackEvent($dataContainer);
+        self::dispatchEvent($eventName, $event);
+
+        return $event->getOptions()->getArrayCopy();
+    }
+
 
     /**
      * Dispatch the given event.
