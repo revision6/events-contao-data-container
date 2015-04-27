@@ -21,19 +21,12 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @package Revision6\Contao\DataContainer\Events
  */
-class SaveCallbackEvent extends Event
+class SaveCallbackEvent extends DataContainerEventBase
 {
     /**
      * The event name.
      */
     const NAME = 'contao.datacontainer.events.save-callback';
-
-    /**
-     * The current dataContainer instance.
-     *
-     * @var \DataContainer $dataContainer The current dataContainer instance.
-     */
-    protected $dataContainer;
 
     /**
      * The current value.
@@ -60,16 +53,6 @@ class SaveCallbackEvent extends Event
     }
 
     /**
-     * Get the current dataContainer instance.
-     *
-     * @return \DataContainer
-     */
-    public function getDataContainer()
-    {
-        return $this->dataContainer;
-    }
-
-    /**
      * Set the value for the field.
      *
      * @param string $value The current value to set.
@@ -90,25 +73,5 @@ class SaveCallbackEvent extends Event
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * Get the current table name.
-     *
-     * @return string
-     */
-    public function getTableName()
-    {
-        return $this->dataContainer->table;
-    }
-
-    /**
-     * Get the current field name.
-     *
-     * @return string
-     */
-    public function getFieldName()
-    {
-        return $this->dataContainer->field;
     }
 }

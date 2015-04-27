@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @package Revision6\Contao\DataContainer\Events
  */
-class LabelCallbackEvent extends Event
+class LabelCallbackEvent extends DataContainerEventBase
 {
     /**
      * The eventName.
@@ -41,13 +41,6 @@ class LabelCallbackEvent extends Event
      * @var string
      */
     protected $label;
-
-    /**
-     * The current dataContainer instance.
-     *
-     * @var object
-     */
-    protected $dataContainer;
 
     /**
      * Set the event vars.
@@ -93,25 +86,5 @@ class LabelCallbackEvent extends Event
     public function getLabel()
     {
         return $this->label;
-    }
-
-    /**
-     * Get the current dataContainer instance.
-     *
-     * @return object
-     */
-    public function getDataContainer()
-    {
-        return $this->dataContainer;
-    }
-
-    /**
-     * Get the current table name.
-     *
-     * @return string
-     */
-    public function getTableName()
-    {
-        return $this->dataContainer->table;
     }
 }

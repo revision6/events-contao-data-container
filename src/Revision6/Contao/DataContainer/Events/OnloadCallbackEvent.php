@@ -21,19 +21,12 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @package Revision6\Contao\Events\SaveCallback
  */
-class OnloadCallbackEvent extends Event
+class OnloadCallbackEvent extends DataContainerEventBase
 {
     /**
      * The event name.
      */
     const NAME = 'contao.datacontainer.events.onload-callback';
-
-    /**
-     * The current dataContainer instance.
-     *
-     * @var \DataContainer $dataContainer The current dataContainer instance.
-     */
-    protected $dataContainer;
 
     /**
      * The constructor for setting some values.
@@ -43,15 +36,5 @@ class OnloadCallbackEvent extends Event
     public function __construct(\DataContainer $dataContainer)
     {
         $this->dataContainer = $dataContainer;
-    }
-
-    /**
-     * Get the current dataContainer instance.
-     *
-     * @return \DataContainer
-     */
-    public function getDataContainer()
-    {
-        return $this->dataContainer;
     }
 }
