@@ -95,11 +95,21 @@ class LabelCallbackEvent extends Event
         return $this->label;
     }
 
+    /**
+     * Get the current dataContainer instance.
+     *
+     * @return object
+     */
     public function getDataContainer()
     {
         return $this->dataContainer;
     }
 
+    /**
+     * Get the current table name.
+     *
+     * @return string
+     */
     public function getTableName()
     {
         return $this->dataContainer->table;

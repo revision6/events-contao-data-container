@@ -45,8 +45,8 @@ class SaveCallbackEvent extends Event
     /**
      * The constructor for setting some values.
      *
-     * @param \DataContainer $dataContainer The current dataContainer instance.
      * @param string         $value         The current field value.
+     * @param \DataContainer $dataContainer The current dataContainer instance.
      */
     public function __construct($value, \DataContainer $dataContainer)
     {
@@ -97,7 +97,8 @@ class SaveCallbackEvent extends Event
      *
      * @return string
      */
-    public function getTableName() {
+    public function getTableName()
+    {
         return $this->dataContainer->table;
     }
 
@@ -106,7 +107,8 @@ class SaveCallbackEvent extends Event
      *
      * @return string
      */
-    public function getFieldName() {
+    public function getFieldName()
+    {
         return $this->dataContainer->field;
     }
 }

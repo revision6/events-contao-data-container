@@ -31,11 +31,12 @@ class CallbackEventHelper
     /**
      * Dispatch the labelCallbackEvent.
      *
-     * @param array  $row       The current database row.
-     * @param string $label     The current label.
-     * @param string $eventName The called eventName.
+     * @param array          $row           The current database row.
+     * @param string         $label         The current label.
+     * @param \DataContainer $dataContainer The current dataContainer instance.
+     * @param string         $eventName     The called eventName.
      *
-     * @return void
+     * @return string
      */
     public static function invokeLabelCallbackEvent($row, $label, $dataContainer, $eventName)
     {
@@ -67,6 +68,8 @@ class CallbackEventHelper
      *
      * @param \DataContainer $dataContainer The current dataContainer instance.
      * @param string         $eventName     The current event name.
+     *
+     * @return void
      */
     public static function invokeOnloadCallbackEvent($dataContainer, $eventName)
     {
@@ -77,8 +80,8 @@ class CallbackEventHelper
     /**
      * Dispatch the optionsCallbackEvent.
      *
-     * @param \DataContainer $dataContainern The current dataConter instance.
-     * @param string         $eventName      The current event name.
+     * @param \DataContainer $dataContainer The current dataConter instance.
+     * @param string         $eventName     The current event name.
      *
      * @return array
      */

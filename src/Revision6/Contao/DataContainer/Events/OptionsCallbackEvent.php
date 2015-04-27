@@ -43,10 +43,12 @@ class OptionsCallbackEvent extends Event
     protected $options;
 
     /**
+     * The constructor for setting some values.
+     *
      * @param \DataContainer $dataContainer The current dataContainer instance.
      * @param \ArrayObject   $options       The current options array object.
      */
-    function __construct(\DataContainer $dataContainer, \ArrayObject $options = null)
+    public function __construct(\DataContainer $dataContainer, \ArrayObject $options = null)
     {
         $this->dataContainer = $dataContainer;
 
@@ -71,6 +73,8 @@ class OptionsCallbackEvent extends Event
      * Set the options to the array object.
      *
      * @param \ArrayObject $options The options to set to the array object.
+     *
+     * @return object
      */
     public function setOptions($options)
     {
@@ -86,5 +90,25 @@ class OptionsCallbackEvent extends Event
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Get the current table name.
+     *
+     * @return string
+     */
+    public function getTableName()
+    {
+        return $this->dataContainer->table;
+    }
+
+    /**
+     * Get the current field name.
+     *
+     * @return string
+     */
+    public function getFieldName()
+    {
+        return $this->dataContainer->field;
     }
 }
