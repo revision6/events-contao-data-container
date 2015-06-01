@@ -44,8 +44,7 @@ class SaveCallbackEvent extends DataContainerEventBase
     public function __construct($value, \DataContainer $dataContainer)
     {
         $this->dataContainer = $dataContainer;
-
-        if ($this->value) {
+        if ($value) {
             $this->value = $value;
         } else {
             $this->value = '';

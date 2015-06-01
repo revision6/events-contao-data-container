@@ -14,8 +14,12 @@
 
 namespace Revision6\Contao\DataContainer;
 
+use Revision6\Contao\DataContainer\Events\ButtonCallbackEvent;
+use Revision6\Contao\DataContainer\Events\ChildRecordCallbackEvent;
 use Revision6\Contao\DataContainer\Events\LabelCallbackEvent;
+use Revision6\Contao\DataContainer\Events\OncreateCallbackEvent;
 use Revision6\Contao\DataContainer\Events\OnloadCallbackEvent;
+use Revision6\Contao\DataContainer\Events\OnsubmitCallbackEvent;
 use Revision6\Contao\DataContainer\Events\OptionsCallbackEvent;
 use Revision6\Contao\DataContainer\Events\SaveCallbackEvent;
 use Symfony\Component\EventDispatcher\Event;
@@ -41,6 +45,22 @@ class CallbackEventHelper
     public static function invokeLabelCallbackEvent($row, $label, $dataContainer, $eventName)
     {
         $event = new LabelCallbackEvent($row, $label, $dataContainer);
+        self::dispatchEvent($eventName, $event);
+
+        return $event->getLabel();
+    }
+
+    /**
+     * Dispatch the childRecordCallbackEvent.
+     *
+     * @param array  $row       The current database row.
+     * @param string $eventName The called eventName.
+     *
+     * @return string
+     */
+    public static function invokeChildRecordCallbackEvent($row, $eventName, $table)
+    {
+        $event = new ChildRecordCallbackEvent($row, $table);
         self::dispatchEvent($eventName, $event);
 
         return $event->getLabel();
@@ -77,6 +97,18 @@ class CallbackEventHelper
         self::dispatchEvent($eventName, $event);
     }
 
+    public static function invokeOnsubmitCallbackEvent($dataContainer, $eventName)
+    {
+        $event = new OnsubmitCallbackEvent($dataContainer);
+        self::dispatchEvent($eventName, $event);
+    }
+
+    public static function invokeOncreateCallbackEvent($table, $recordId, $values, $dataContainer, $eventName)
+    {
+        $event = new OncreateCallbackEvent($table, $recordId, $values, $dataContainer);
+        self::dispatchEvent($eventName, $event);
+    }
+
     /**
      * Dispatch the optionsCallbackEvent.
      *
@@ -91,6 +123,44 @@ class CallbackEventHelper
         self::dispatchEvent($eventName, $event);
 
         return $event->getOptions()->getArrayCopy();
+    }
+
+    public static function invokeButtonCallbackEvent(
+        $row,
+        $href,
+        $label,
+        $title,
+        $icon,
+        $attributes,
+        $table,
+        $roots,
+        $childs,
+        $circularReference,
+        $previous,
+        $next,
+        $dataContainer,
+        $eventName,
+        $command
+    ) {
+        $event = new ButtonCallbackEvent(
+            $row,
+            $href,
+            $label,
+            $title,
+            $icon,
+            $attributes,
+            $table,
+            $roots,
+            $childs,
+            $circularReference,
+            $previous,
+            $next,
+            $dataContainer,
+            $command
+        );
+        self::dispatchEvent($eventName, $event);
+
+        return $event->getButton();
     }
 
 
