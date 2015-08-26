@@ -17,6 +17,7 @@ namespace Revision6\Contao\DataContainer;
 use Revision6\Contao\DataContainer\Events\ButtonCallbackEvent;
 use Revision6\Contao\DataContainer\Events\ChildRecordCallbackEvent;
 use Revision6\Contao\DataContainer\Events\LabelCallbackEvent;
+use Revision6\Contao\DataContainer\Events\LoadCallbackEvent;
 use Revision6\Contao\DataContainer\Events\OncreateCallbackEvent;
 use Revision6\Contao\DataContainer\Events\OnloadCallbackEvent;
 use Revision6\Contao\DataContainer\Events\OnsubmitCallbackEvent;
@@ -78,6 +79,23 @@ class CallbackEventHelper
     public static function invokeSaveCallbackEvent($dataContainer, $value, $eventName)
     {
         $event = new SaveCallbackEvent($value, $dataContainer);
+        self::dispatchEvent($eventName, $event);
+
+        return $event->getValue();
+    }
+
+    /**
+     * Dispatch the loadCallbackEvent.
+     *
+     * @param \DataContainer $dataContainer The current dataContainer.
+     * @param mixed          $value         The current field value.
+     * @param string         $eventName     The current event name.
+     *
+     * @return mixed
+     */
+    public static function invokeLoadCallbackEvent($dataContainer, $value, $eventName)
+    {
+        $event = new LoadCallbackEvent($value, $dataContainer);
         self::dispatchEvent($eventName, $event);
 
         return $event->getValue();

@@ -73,6 +73,22 @@ class CallbackEventFactory
     }
 
     /**
+     * Create the load callback and return it to the datacontainer.
+     *
+     * @param string $eventName The current event name.
+     *
+     * @return callable
+     */
+    public static function createLoadCallback($eventName)
+    {
+        $callback = function ($varValue, $dataContainer) use ($eventName) {
+            return CallbackEventHelper::invokeLoadCallbackEvent($dataContainer, $varValue, $eventName);
+        };
+
+        return $callback;
+    }
+
+    /**
      * Create the onload callback and return it to the datacontainer.
      *
      * @param string $eventName The current event name.
